@@ -1,0 +1,9 @@
+Droplet Name: pjeroandco
+IP Address: 207.154.204.74
+Username: root
+Password: ae1e25ff648f8dac
+novaPassword: pjeroandco1
+Username2: davor
+Password2: davor1
+soba: 1
+ 
