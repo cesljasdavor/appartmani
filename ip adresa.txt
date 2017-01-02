@@ -13,4 +13,8 @@ Password3: deploy1
 MySQL
 user: root
 password: password
+
+GitHub connection
+passphrase: deploy
+SHA256:NOAisL4QS7Klf30vm4Yt9/pxJrhJub7s/77rJfUdNPE 
  

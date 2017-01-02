@@ -5,7 +5,7 @@ class PersonsController < ApplicationController
 
     if @person.save
       respond_to do |format|
-        format.json
+        format.json {render :create}
       end
     end
   end
@@ -19,7 +19,8 @@ class PersonsController < ApplicationController
 
   private
   def person_params
-    debugger
-    params.require(:person)
+
+    params.require(:person).permit(:name,:surname,:country,:address,:addressNo)
+
   end
 end
