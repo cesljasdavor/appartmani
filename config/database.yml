@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password: password
+  password: Bogikonjica1
   host: localhost
   port: 3306
 
