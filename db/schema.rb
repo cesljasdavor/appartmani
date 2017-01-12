@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112092352) do
+ActiveRecord::Schema.define(version: 20170112133139) do
 
   create_table "accommodations", force: :cascade do |t|
-    t.string  "name",        limit: 255, null: false
-    t.integer "personsFrom", limit: 4
-    t.integer "personsTo",   limit: 4
-    t.integer "type",        limit: 4,   null: false
-    t.boolean "view",                    null: false
-    t.boolean "appartment",              null: false
+    t.string  "name",               limit: 255, null: false
+    t.integer "personsFrom",        limit: 4
+    t.integer "personsTo",          limit: 4
+    t.boolean "view",                           null: false
+    t.boolean "appartment",                     null: false
+    t.integer "accommodation_type", limit: 4,   null: false
   end
 
   create_table "descriptions", force: :cascade do |t|
@@ -57,14 +57,15 @@ ActiveRecord::Schema.define(version: 20170112092352) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.datetime "dateFrom",                                   null: false
-    t.datetime "dateTo",                                     null: false
-    t.boolean  "boolTv",                     default: false
-    t.boolean  "boolParking",                default: false
-    t.boolean  "boolInternet",               default: false
+    t.datetime "dateFrom",                                     null: false
+    t.datetime "dateTo",                                       null: false
+    t.boolean  "boolTv",                       default: false
+    t.boolean  "boolParking",                  default: false
+    t.boolean  "boolInternet",                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "accommodation_id", limit: 4,                 null: false
+    t.integer  "accommodation_id", limit: 4,                   null: false
+    t.string   "email",            limit: 255,                 null: false
   end
 
   create_table "tvs", force: :cascade do |t|
@@ -75,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170112092352) do
   create_table "users", force: :cascade do |t|
     t.string  "email",     limit: 255,             null: false
     t.string  "password",  limit: 255,             null: false
-    t.integer "privilege", limit: 4,   default: 1
+    t.integer "privilege", limit: 4,   default: 0
   end
 
 end

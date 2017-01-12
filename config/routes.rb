@@ -8,14 +8,20 @@ Rails.application.routes.draw do
   #user
   post 'login' , to: 'users#login'
   post 'register' , to: 'users#register'
-  get 'user/get_admins', to: 'users#get_admins'
-  post 'user/add_admin', to: 'users#add_admin'
-  post 'user/remove_user', to: 'users#destroy'
+  post 'confirm_registration', to: 'users#confirm_registration'
+  get 'users/get_admins', to: 'users#get_admins'
+  post 'users/add_admin', to: 'users#add_admin'
+  post 'users/remove_user', to: 'users#destroy'
   #user + reservations
-  post 'user/get_reservations', to: 'users#get_reservations'
+  post 'users/get_reservations', to: 'users#get_reservations'
+
 
   #accommodations
   get 'accommodations/get_accommodations', to: 'accommodations#get_accommodations'
+  post 'accommodations/get_free_room', to: 'accommodations#get_free_room'
+
+  #reservations
+  post 'reservations/add_reservation', to: 'reservations#add_reservation'
 
 
   # Example of regular route:
