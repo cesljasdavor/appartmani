@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :persons
 
   #user
   post 'login' , to: 'users#login'
@@ -24,7 +23,11 @@ Rails.application.routes.draw do
   #reservations
   post 'reservations/add_reservation', to: 'reservations#add_reservation'
 
+  #persons
+  get 'persons/country_statistics', to: 'persons#country_statistics'
+  get 'persons/city_statistics', to: 'persons#city_statistics'
 
+  resources :persons
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
