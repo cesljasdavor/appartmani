@@ -5,8 +5,18 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   resources :persons
 
+  #user
   post 'login' , to: 'users#login'
   post 'register' , to: 'users#register'
+  get 'user/get_admins', to: 'users#get_admins'
+  post 'user/add_admin', to: 'users#add_admin'
+  post 'user/remove_user', to: 'users#destroy'
+  #user + reservations
+  post 'user/get_reservations', to: 'users#get_reservations'
+
+  #accommodations
+  get 'accommodations/get_accommodations', to: 'accommodations#get_accommodations'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

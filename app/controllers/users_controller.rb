@@ -37,6 +37,12 @@ class UsersController < ApplicationController
 
   end
 
+  def get_admins
+    respond_to do |format|
+      format.json {render :get_admins}
+    end
+  end
+
   private
   def login_register_params
     params.require(:user).permit(:email,:password)
