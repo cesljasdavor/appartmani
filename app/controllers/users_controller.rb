@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def register
     hashJson = email_and_password
     @user = User.find_by_email(hashJson[:email])
+    debugger
     if @user.nil?
       @user = User.create(hashJson)
         if @user.save
@@ -118,7 +119,7 @@ class UsersController < ApplicationController
   end
 
   def person_params
-    params.permit(:country, :name, :surname, :address, :addressNo)
+    params.permit(:city, :country, :name, :surname, :address, :addressNo)
   end
 
   def extract_email

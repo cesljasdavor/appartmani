@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #accommodations
   get 'accommodations/get_accommodations', to: 'accommodations#get_accommodations'
   post 'accommodations/get_free_room', to: 'accommodations#get_free_room'
+  get 'accommodations/accommodation_statistics', to: 'accommodations#accommodation_statistics'
 
   #reservations
   post 'reservations/add_reservation', to: 'reservations#add_reservation'

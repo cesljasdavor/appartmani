@@ -1,8 +1,21 @@
+require 'json'
 class AccommodationsController < ApplicationController
-  attr_accessor :eachOne, :freeRoomId
+  attr_accessor :eachOne, :freeRoomId, :room_statistics
 
   def get_accommodations
     @eachOne = Accommodation.group(:accommodation_type)
+  end
+
+  def accommodation_statistics
+    @room_statistics = Hash.new
+    Accommodation.all.each do |accommodation|
+      noOfDays = 0
+      accommodation.reservations.each do |reservation|
+        noOfDays = (reservation.dateTo.to_datetime - reservation.dateFrom.to_datetime + 1).to_i
+      end
+      hash = {accommodation.name => noOfDays}
+      @room_statistics.merge!(hash)
+    end
   end
 
   def get_free_room
@@ -26,7 +39,7 @@ class AccommodationsController < ApplicationController
                 end
                 order by dateTo desc
                 limit 1;"
-    @freeRoomId = Reservation.find_by_sql(sql_query)
+    @freeRoomId = Accommodation.find_by_sql(sql_query)[0]
   end
 
   private

@@ -1,7 +1,9 @@
 class ReservationsController < ApplicationController
 
   def add_reservation
-    @reservation = Reservation.create(reservation_params)
+    hashJson = reservation_params
+    @reservation = Reservation.create(hashJson)
+    @reservation.user_id = hashJson[:email]
     if @reservation.save
       respond_to do |format|
         format.json {render :add_reservation}

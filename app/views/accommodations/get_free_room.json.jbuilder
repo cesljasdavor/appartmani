@@ -1,1 +1,1 @@
-json.id @freeRoomId
+json.extract! @freeRoomId, :id
