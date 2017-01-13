@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112211429) do
+ActiveRecord::Schema.define(version: 20170113133110) do
 
   create_table "accommodations", force: :cascade do |t|
     t.string  "name",               limit: 255, null: false
@@ -25,12 +25,6 @@ ActiveRecord::Schema.define(version: 20170112211429) do
   create_table "descriptions", force: :cascade do |t|
     t.integer "accommodation_id", limit: 4
     t.string  "description",      limit: 255
-  end
-
-  create_table "guests", force: :cascade do |t|
-    t.integer "reservation_id",    limit: 4
-    t.integer "number_of_persons", limit: 4
-    t.integer "grown_ups",         limit: 4
   end
 
   create_table "internets", force: :cascade do |t|
@@ -58,16 +52,17 @@ ActiveRecord::Schema.define(version: 20170112211429) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.datetime "dateFrom",                                     null: false
-    t.datetime "dateTo",                                       null: false
-    t.boolean  "boolTv",                       default: false
-    t.boolean  "boolParking",                  default: false
-    t.boolean  "boolInternet",                 default: false
+    t.datetime "dateFrom",                                      null: false
+    t.datetime "dateTo",                                        null: false
+    t.boolean  "boolTv",                        default: false
+    t.boolean  "boolParking",                   default: false
+    t.boolean  "boolInternet",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "accommodation_id", limit: 4,                   null: false
-    t.string   "email",            limit: 255,                 null: false
-    t.integer  "user_id",          limit: 4,                   null: false
+    t.integer  "accommodation_id",  limit: 4,                   null: false
+    t.string   "email",             limit: 255,                 null: false
+    t.integer  "user_id",           limit: 4,                   null: false
+    t.integer  "number_of_persons", limit: 4,                   null: false
   end
 
   create_table "tvs", force: :cascade do |t|
