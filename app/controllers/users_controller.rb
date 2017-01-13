@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   def register
     hashJson = email_and_password
     @user = User.find_by_email(hashJson[:email])
-    debugger
     if @user.nil?
       @user = User.create(hashJson)
         if @user.save
