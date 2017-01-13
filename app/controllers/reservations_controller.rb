@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
 
+  attr_accessor :services_statistics
+
   def add_reservation
     hashJson = reservation_params
     @reservation = Reservation.create(hashJson)
@@ -13,6 +15,20 @@ class ReservationsController < ApplicationController
         format.json {render :reservation_failed}
       end
     end
+  end
+
+  def services_statistics
+    @services_statistics = {}
+    tv = 0
+    internet = 0
+    parking = 0
+    Reservation.all.each do |reservation|
+      tv += reservation.boolTv ? 1 : 0
+      internet += reservation.boolInternet ? 1 : 0
+      parking += reservation.boolParking ? 1 : 0
+    end
+
+    @services_statistics.merge!({"tv"=>tv}).merge!({"internet" => internet}).merge!({"parking"=>parking})
   end
 
   private

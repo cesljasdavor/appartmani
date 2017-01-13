@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   #reservations
   post 'reservations/add_reservation', to: 'reservations#add_reservation'
+  get 'reservations/services_statistics', to: 'reservations#services_statistics'
 
   #persons
   get 'persons/country_statistics', to: 'persons#country_statistics'
