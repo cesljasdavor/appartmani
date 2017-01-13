@@ -1,6 +1,6 @@
 require 'json'
 class AccommodationsController < ApplicationController
-  attr_accessor :eachOne, :freeRoomId, :room_statistics
+  attr_accessor :eachOne, :freeRoomId, :room_statistics, :reservations
 
   def get_accommodations
     @eachOne = Accommodation.group(:accommodation_type)
@@ -15,6 +15,20 @@ class AccommodationsController < ApplicationController
       end
       hash = {accommodation.name => noOfDays}
       @room_statistics.merge!(hash)
+    end
+  end
+
+  def rooms_reservations
+    id = Accommodation.find_by(extract_name)
+    if id.nil?
+      respond_to do |f|
+        f.json {render :no_reservations}
+      end
+    else
+      @reservations = Reservation.where(accommodation_id: id)
+      respond_to do |f|
+        f.json {render :rooms_reservations}
+      end
     end
   end
 
@@ -45,6 +59,10 @@ class AccommodationsController < ApplicationController
   private
   def requested_date_and_type
     params.permit(:dateFrom, :dateTo, :type)
+  end
+
+  def extract_name
+    params.require(:accommodation).permit(:name)
   end
 
 end
