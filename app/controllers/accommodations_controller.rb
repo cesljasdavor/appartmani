@@ -38,21 +38,22 @@ class AccommodationsController < ApplicationController
     dateTo = query_params[:dateTo].to_datetime.to_s
     type = query_params[:type].to_s
 
-    sql_query = "select accommodations.id from accommodations left join reservations
-                 on accommodations.id=reservations.accommodation_id
-                 where accommodation_type = #{type}
-                 and accommodations.id not in (
-                  select accommodations.id from accommodations left join reservations
+    sql_query ="select accommodations.id
+                from accommodations left join reservations
+                on accommodations.id=reservations.accommodation_id
+                where accommodation_type = #{type} and accommodations.id not in (
+                  select accommodations.id
+                  from accommodations left join reservations
                   on accommodations.id=reservations.accommodation_id
                   where ((dateFrom <= '#{dateFrom}' and '#{dateFrom}' <= dateTo)
                   or (dateFrom <= '#{dateTo}' and '#{dateTo}' <= dateTo))
-                  and accommodation_type = #{type})
-                and case
-                  when dateTo is null then 1
-                  else dateTo < '#{dateFrom}'
-                end
-                order by dateTo desc
+                  and accommodation_type = #{type}
+                )
+                group by accommodations.id
+                order by min(case when '#{dateFrom}'-dateTo >= 0 then '#{dateFrom}'-dateTo end)+
+                min(case when dateFrom-'#{dateTo}' >= 0 then dateFrom-'#{dateTo}' end)
                 limit 1;"
+
     @freeRoomId = Accommodation.find_by_sql(sql_query)[0]
   end
 
