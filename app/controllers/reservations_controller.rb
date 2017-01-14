@@ -71,7 +71,7 @@ class ReservationsController < ApplicationController
                  from reservations join accommodations
                  on reservations.accommodation_id = accommodations.id
                  join users on reservations.user_id = users.id
-                 where users.confirm_status = 0;"
+                 where users.confirm_status = 1;"
     @unconfirmed_reservations = ActiveRecord::Base.connection.execute(sql_query)
 
   end
@@ -79,13 +79,13 @@ class ReservationsController < ApplicationController
   def confirm_first_reservation
     hashJson = user_id_and_status
     user = User.find(hashJson[:user_id])
-    if hashJson[:status] == 1
+    if hashJson[:status] === 1
       #ne treba vise potvrdivati rezervacije
       user.update(confirm_status: 2)
       respond_to do |format|
         format.json {render :confirm}
       end
-    elsif hashJson[:status] == 0
+    elsif hashJson[:status] === 0
       #nema potvrdenih rezervacija opet isto
       user.reservations.destroy_all
       user.update(confirm_status: 0)
