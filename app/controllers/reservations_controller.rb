@@ -12,8 +12,9 @@ class ReservationsController < ApplicationController
       end and return
     end
 
+    hashJson.merge!({"user_id" => user.id})
+    debugger
     @reservation = Reservation.create(hashJson)
-    @reservation.user_id = hashJson[:email]
 
     if @reservation.save
       if user.confirm_status === 0
@@ -97,7 +98,7 @@ class ReservationsController < ApplicationController
 
   private
   def reservation_params
-    params.require(:reservation).permit(:email, :accommodation_id, :dateFrom, :dateTo, :boolTv, :boolParking, :boolInternet)
+    params.require(:reservation).permit(:email, :accommodation_id, :dateFrom, :dateTo, :boolTv, :boolParking, :boolInternet, :number_of_persons)
   end
 
   def user_id_and_status

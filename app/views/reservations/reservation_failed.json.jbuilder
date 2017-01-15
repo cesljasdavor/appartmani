@@ -1,1 +1,1 @@
-json.id "Nisam uspio rezervirati!"
+json.id "error"

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'reservations/services_statistics', to: 'reservations#services_statistics'
   get 'reservations/service_dependencies', to: 'reservations#service_dependencies'
   get 'reservations/get_unconfirmed_reservations', to: 'reservations#get_unconfirmed_reservations'
-  post 'reservations/confirm_first_reservation' , to: 'reservations/confirm_first_reservation'
+  post 'reservations/confirm_first_reservation' , to: 'reservations#confirm_first_reservation'
 
   #persons
   get 'persons/country_statistics', to: 'persons#country_statistics'
