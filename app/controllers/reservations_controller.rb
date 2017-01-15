@@ -13,7 +13,6 @@ class ReservationsController < ApplicationController
     end
 
     hashJson.merge!({"user_id" => user.id})
-    debugger
     @reservation = Reservation.create(hashJson)
 
     if @reservation.save
