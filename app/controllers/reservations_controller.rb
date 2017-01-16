@@ -82,7 +82,7 @@ class ReservationsController < ApplicationController
   end
 
   def get_unconfirmed_reservations
-    sql_query = "select reservations.user_id, reservations.email, reservations.dateFrom, reservations.dateTo, accommodations.accommodation_type
+    sql_query = "select reservations.user_id, reservations.email, reservations.dateFrom, reservations.dateTo, reservations.number_of_persons, accommodations.accommodation_type
                  from reservations join accommodations
                  on reservations.accommodation_id = accommodations.id
                  join users on reservations.user_id = users.id
