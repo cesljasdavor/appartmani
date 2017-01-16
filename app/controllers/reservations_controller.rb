@@ -29,6 +29,21 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def change_reservation
+    hashJson = get_change_params
+    reservation = Reservation.find(hashJson[:id])
+    if reservation.update(dateFrom: hashJson[:dateFrom],dateTo: hashJson[:dateTo])
+      respond_to do |format|
+        format.json {render :changed}
+      end
+    else
+      respond_to do |format|
+        format.json {render :change_failed}
+      end
+    end
+
+  end
+
   def services_statistics
     @services_statistics = {}
     tv = 0
@@ -102,5 +117,9 @@ class ReservationsController < ApplicationController
 
   def user_id_and_status
     params.permit(:user_id, :status)
+  end
+
+  def get_change_params
+    params.require(:reservation).permit(:id,:dateFrom,:dateTo)
   end
 end
