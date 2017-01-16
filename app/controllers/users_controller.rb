@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  attr_accessor :reservations
+  attr_accessor :reservations, :active_users
 
   def register
     hashJson = email_and_password
@@ -47,11 +47,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_active_users
+  end
+
+  def logout
+    @user = User.find_by email: extract_email
+    if @user.update(active: false)
+      respond_to do |format|
+        format.json {render :logout}
+      end
+    else
+      respond_to do |format|
+        format.json {render :login_register_error}
+      end
+    end
+  end
+
   def login
     hashJson = email_and_password
     @user = User.find_by_email(hashJson[:email])
 
     if @user.password === hashJson[:password]
+      #loginaj se
+      @user.update(active: true)
       respond_to do |format|
         format.json {render :login}
       end

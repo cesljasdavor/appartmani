@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   #user
   post 'login' , to: 'users#login'
   post 'register' , to: 'users#register'
+  post 'logout', to: 'users#logout'
   post 'confirm_registration', to: 'users#confirm_registration'
+  get 'users/get_active_users' , to: 'users#get_active_users'
   get 'users/get_admins', to: 'users#get_admins'
   post 'users/add_admin', to: 'users#add_admin'
   post 'users/remove_user', to: 'users#destroy'
